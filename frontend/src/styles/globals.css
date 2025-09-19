@@ -1,0 +1,28 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+body {
+  @apply bg-slate-50 text-slate-900 font-sans;
+}
+
+.dark {
+  @apply bg-slate-900 text-slate-50;
+}
+
+:root {
+  --radius: 0.625rem;
+  --primary: theme('colors.blue.600');
+  --secondary: theme('colors.green.500');
+  --accent: theme('colors.orange.400');
+  --destructive: theme('colors.red.600');
+}
+
+@layer base {
+  * {
+    @apply box-border m-0 p-0;
+  }
+
+  a {
+    @apply text-inherit no-underline;
+  }
+}
