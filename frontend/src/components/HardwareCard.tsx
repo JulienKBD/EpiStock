@@ -6,7 +6,8 @@ import {
   CardTitle,
   CardDescription,
 } from "@/components/ui/card";
-import Image from 'next/image'
+import Image from "next/image";
+import { Barcode, Factory, DollarSign, MapPin, CheckCircle } from "lucide-react";
 
 interface HardwareCardProps {
   nom: string;
@@ -30,34 +31,48 @@ export default function HardwareCard({
   emplacement,
 }: HardwareCardProps): ReactElement {
   return (
-    <Card className="w-full max-w-sm">
-      <CardHeader>
-        <CardTitle>{nom}</CardTitle>
-        <CardDescription>{type}</CardDescription>
-      </CardHeader>
-      <CardContent className="space-y-1">
+    <Card className="w-full max-w-sm overflow-hidden shadow-md hover:shadow-lg transition rounded-xl">
+      <div className="w-full h-48 relative">
         <Image
           src={image}
-          width={250}
-          height={250}
-          alt="Hardware picture"
+          alt={nom}
+          fill
+          className="object-contain p-4"
         />
-        <p>
-          <strong>Numéro de série:</strong> {numeroSerie}
-        </p>
-        <p>
-          <strong>Marque:</strong> {marque}
-        </p>
-        <p>
-          <strong>Valeur:</strong> {valeur}
-        </p>
-        <p>
-          <strong>État:</strong> {etat}
-        </p>
-        <p>
-          <strong>Emplacement:</strong> {emplacement}
-        </p>
+      </div>
+
+      <CardHeader>
+        <CardTitle className="text-lg font-semibold">{nom}</CardTitle>
+        <CardDescription className="text-sm text-slate-500 dark:text-slate-500">
+          {type}
+        </CardDescription>
+      </CardHeader>
+
+      <CardContent className="space-y-3 text-sm">
+        <InfoRow icon={<Barcode className="h-4 w-4" />} label="Numéro de série" value={numeroSerie} />
+        <InfoRow icon={<Factory className="h-4 w-4" />} label="Marque" value={marque} />
+        <InfoRow icon={<DollarSign className="h-4 w-4" />} label="Valeur" value={valeur} />
+        <InfoRow icon={<CheckCircle className="h-4 w-4" />} label="État" value={etat} />
+        <InfoRow icon={<MapPin className="h-4 w-4" />} label="Emplacement" value={emplacement} />
       </CardContent>
     </Card>
+  );
+}
+
+function InfoRow({
+  icon,
+  label,
+  value,
+}: {
+  icon: ReactElement;
+  label: string;
+  value: string;
+}) {
+  return (
+    <div className="flex items-center gap-2">
+      <span className="text-slate-500 dark:text-slate-400">{icon}</span>
+      <span className="font-medium">{label}:</span>
+      <span className="text-slate-700 dark:text-slate-800 truncate">{value}</span>
+    </div>
   );
 }

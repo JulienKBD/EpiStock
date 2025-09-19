@@ -39,7 +39,7 @@ export default function Navbar(): ReactElement {
               <NavigationMenuItem>
                 <NavigationMenuLink asChild>
                   <Link
-                    href="/materials"
+                    href="/materiel"
                     className="text-slate-900 dark:text-slate-50 hover:text-slate-500 dark:hover:text-slate-400"
                   >
                     Matériel
@@ -93,7 +93,7 @@ export default function Navbar(): ReactElement {
                   Documentation
                 </Link>
                 <Link
-                  href="/materials"
+                  href="/materiel"
                   className="text-slate-900 dark:text-slate-50 hover:underline"
                 >
                   Matériel

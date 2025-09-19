@@ -11,13 +11,13 @@ export default function Home(): ReactElement {
         </p>
         <div className="flex flex-wrap justify-center gap-4 mt-4">
           <Link
-            href="/materials"
+            href="/materiel"
             className="px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
           >
             Voir le matériel
           </Link>
           <Link
-            href="/materials"
+            href="/materiel"
             className="px-6 py-3 bg-green-600 text-white rounded-md hover:bg-green-700 transition"
           >
             Ajouter du matériel

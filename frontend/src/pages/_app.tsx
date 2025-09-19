@@ -1,5 +1,6 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
+import { ThemeProvider } from "@/components/ui/theme-provider";
 import { Geist, Geist_Mono } from "next/font/google";
 import Head from "next/head";
 import Navbar from "../components/Navbar";
@@ -28,15 +29,17 @@ export default function App({ Component, pageProps }: AppProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div
-        className={`flex flex-col min-h-screen ${geistSans.variable} ${geistMono.variable}`}
-      >
-        <Navbar />
-        <main className="flex-1 p-10">
-          <Component {...pageProps} />
-        </main>
-        <Footer />
-      </div>
+      <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+        <div
+          className={`flex flex-col min-h-screen bg-slate-50 text-slate-900 ${geistSans.variable} ${geistMono.variable}`}
+        >
+          <Navbar />
+          <main className="flex-1 p-10">
+            <Component {...pageProps} />
+          </main>
+          <Footer />
+        </div>
+      </ThemeProvider>
     </>
   );
 }
