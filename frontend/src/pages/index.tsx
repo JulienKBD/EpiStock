@@ -27,15 +27,15 @@ export default function Home(): ReactElement {
 
       {/* Fonctionnalités / cartes */}
       <section className="max-w-7xl mx-auto py-16 px-4 grid md:grid-cols-3 gap-8">
-        <div className="p-6  bg-slate-200 rounded-lg shadow hover:shadow-lg transition">
+        <div className="p-6  bg-slate-300 rounded-lg shadow hover:shadow-lg transition">
           <h3 className="text-xl font-semibold mb-2">Documentation</h3>
           <p>Accédez à tous nos guides pour bien démarrer et utiliser EpiStock.</p>
         </div>
-        <div className="p-6 bg-slate-200 rounded-lg shadow hover:shadow-lg transition">
+        <div className="p-6 bg-slate-300 rounded-lg shadow hover:shadow-lg transition">
           <h3 className="text-xl font-semibold mb-2">Matériel</h3>
           <p>Gérez vos équipements, suivez l’inventaire et les attributions.</p>
         </div>
-        <div className="p-6 bg-slate-200 rounded-lg shadow hover:shadow-lg transition">
+        <div className="p-6 bg-slate-300 rounded-lg shadow hover:shadow-lg transition">
           <h3 className="text-xl font-semibold mb-2">Dashboard</h3>
           <p>Un tableau de bord complet pour suivre vos données importantes.</p>
         </div>

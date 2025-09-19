@@ -31,7 +31,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
       <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
         <div
-          className={`flex flex-col min-h-screen bg-slate-50 text-slate-900 ${geistSans.variable} ${geistMono.variable}`}
+          className={`flex flex-col min-h-screen bg-slate-200 text-slate-900 ${geistSans.variable} ${geistMono.variable}`}
         >
           <Navbar />
           <main className="flex-1 p-10">

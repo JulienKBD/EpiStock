@@ -66,6 +66,16 @@ export default function Navbar(): ReactElement {
                   </Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuLink asChild>
+                  <Link
+                    href="/wishlist"
+                    className="text-slate-900 dark:text-slate-50 hover:text-slate-500 dark:hover:text-slate-400"
+                  >
+                    Liste de souhaits
+                  </Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
         </div>
@@ -109,6 +119,9 @@ export default function Navbar(): ReactElement {
                 </Link>
                 <Link href="/dashboard" className="text-slate-900 dark:text-slate-50 hover:underline">
                   Dashboard
+                </Link>
+                <Link href="/wishlist" className="text-slate-900 dark:text-slate-50 hover:underline">
+                  Liste de souhaits
                 </Link>
                 <Link
                   href="/login"

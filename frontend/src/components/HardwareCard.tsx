@@ -31,7 +31,7 @@ export default function HardwareCard({
   emplacement,
 }: HardwareCardProps): ReactElement {
   return (
-    <Card className="w-full max-w-sm overflow-hidden shadow-md hover:shadow-lg transition rounded-xl">
+    <Card className="w-full max-w-sm overflow-hidden shadow-md hover:shadow-lg transition rounded-xl bg-blue-200">
       <div className="w-full h-48 relative">
         <Image
           src={image}
@@ -44,7 +44,7 @@ export default function HardwareCard({
 
       <CardHeader>
         <CardTitle className="text-lg font-semibold">{nom}</CardTitle>
-        <CardDescription className="text-sm text-slate-500 dark:text-slate-500">
+        <CardDescription className="text-sm text-slate-500">
           {type}
         </CardDescription>
       </CardHeader>
@@ -71,7 +71,7 @@ function InfoRow({
 }) {
   return (
     <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
-      <span className="text-slate-500 dark:text-slate-400">{icon}</span>
+      <span className="text-slate-500">{icon}</span>
       <span className="font-medium">{label}:</span>
       <span className="text-slate-700 dark:text-slate-800 truncate">{value}</span>
     </div>
