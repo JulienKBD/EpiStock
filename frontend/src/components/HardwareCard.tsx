@@ -38,6 +38,7 @@ export default function HardwareCard({
           alt={nom}
           fill
           className="object-contain p-4"
+          priority
         />
       </div>
 
@@ -69,7 +70,7 @@ function InfoRow({
   value: string;
 }) {
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
       <span className="text-slate-500 dark:text-slate-400">{icon}</span>
       <span className="font-medium">{label}:</span>
       <span className="text-slate-700 dark:text-slate-800 truncate">{value}</span>

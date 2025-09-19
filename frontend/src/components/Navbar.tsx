@@ -8,16 +8,27 @@ import {
 } from "@/components/ui/navigation-menu";
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet";
 import { Menu, X } from "lucide-react";
+import Image from "next/image";
+import { DialogTitle, DialogDescription } from "@radix-ui/react-dialog";
 
 export default function Navbar(): ReactElement {
   return (
     <nav className="w-full border-b bg-slate-50/80 dark:bg-slate-900/95 px-6 py-3 shadow-md backdrop-blur-md">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
-        {/* Logo */}
+        {/* Logo + titre */}
         <Link
           href="/"
-          className="text-2xl font-bold text-slate-900 dark:text-slate-200"
+          className="ml-4 text-2xl md:text-3xl font-bold text-slate-900 dark:text-slate-200 flex items-center"
         >
+          <div className="relative w-16 h-16 md:w-20 md:h-20 flex-shrink-0">
+            <Image
+              src="/favicon.ico"
+              alt="EpiStock Logo"
+              className="object-contain"
+              width={400}
+              height={400}
+            />
+          </div>
           EpiStock
         </Link>
 
@@ -35,7 +46,6 @@ export default function Navbar(): ReactElement {
                   </Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
-
               <NavigationMenuItem>
                 <NavigationMenuLink asChild>
                   <Link
@@ -46,7 +56,6 @@ export default function Navbar(): ReactElement {
                   </Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
-
               <NavigationMenuItem>
                 <NavigationMenuLink asChild>
                   <Link
@@ -85,23 +94,20 @@ export default function Navbar(): ReactElement {
                   <X className="h-6 w-6 text-slate-900 dark:text-slate-200" />
                 </button>
               </SheetClose>
+
+              <DialogTitle className="sr-only">Menu principal</DialogTitle>
+              <DialogDescription className="sr-only">
+                Ce menu vous permet de naviguer vers la documentation, le matériel, le dashboard et de vous connecter.
+              </DialogDescription>
+
               <nav className="flex flex-col space-y-4 mt-8">
-                <Link
-                  href="/docs"
-                  className="text-slate-900 dark:text-slate-50 hover:underline"
-                >
+                <Link href="/docs" className="text-slate-900 dark:text-slate-50 hover:underline">
                   Documentation
                 </Link>
-                <Link
-                  href="/materiel"
-                  className="text-slate-900 dark:text-slate-50 hover:underline"
-                >
+                <Link href="/materiel" className="text-slate-900 dark:text-slate-50 hover:underline">
                   Matériel
                 </Link>
-                <Link
-                  href="/dashboard"
-                  className="text-slate-900 dark:text-slate-50 hover:underline"
-                >
+                <Link href="/dashboard" className="text-slate-900 dark:text-slate-50 hover:underline">
                   Dashboard
                 </Link>
                 <Link

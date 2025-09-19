@@ -3,7 +3,7 @@ import { ReactElement } from "react";
 
 export default function Home(): ReactElement {
   return (
-    <main>
+    <main className="py-25">
       <section className="max-w-5xl mx-auto text-center space-y-6">
         <h1 className="text-4xl font-bold">Bienvenue sur EpiStock</h1>
         <p className="text-lg">
@@ -22,6 +22,22 @@ export default function Home(): ReactElement {
           >
             Ajouter du matériel
           </Link>
+        </div>
+      </section>
+
+      {/* Fonctionnalités / cartes */}
+      <section className="max-w-7xl mx-auto py-16 px-4 grid md:grid-cols-3 gap-8">
+        <div className="p-6  bg-slate-200 rounded-lg shadow hover:shadow-lg transition">
+          <h3 className="text-xl font-semibold mb-2">Documentation</h3>
+          <p>Accédez à tous nos guides pour bien démarrer et utiliser EpiStock.</p>
+        </div>
+        <div className="p-6 bg-slate-200 rounded-lg shadow hover:shadow-lg transition">
+          <h3 className="text-xl font-semibold mb-2">Matériel</h3>
+          <p>Gérez vos équipements, suivez l’inventaire et les attributions.</p>
+        </div>
+        <div className="p-6 bg-slate-200 rounded-lg shadow hover:shadow-lg transition">
+          <h3 className="text-xl font-semibold mb-2">Dashboard</h3>
+          <p>Un tableau de bord complet pour suivre vos données importantes.</p>
         </div>
       </section>
     </main>
