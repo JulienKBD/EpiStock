@@ -32,7 +32,7 @@ export default function App({ Component, pageProps }: AppProps) {
         className={`flex flex-col min-h-screen ${geistSans.variable} ${geistMono.variable}`}
       >
         <Navbar />
-        <main className="flex-1">
+        <main className="flex-1 p-10">
           <Component {...pageProps} />
         </main>
         <Footer />

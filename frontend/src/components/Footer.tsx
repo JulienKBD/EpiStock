@@ -7,6 +7,9 @@ export default function Footer(): ReactElement {
         <p className="text-sm text-gray-700 dark:text-gray-300">
           © {new Date().getFullYear()} EpiStock. All rights reserved.
         </p>
+        <p className="text-sm text-gray-700 dark:text-gray-300">
+          Developed by JulienKBD.
+        </p>
       </div>
     </footer>
   );
