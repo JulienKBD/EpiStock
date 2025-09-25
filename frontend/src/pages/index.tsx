@@ -17,10 +17,10 @@ export default function Home(): ReactElement {
             Voir le matériel
           </Link>
           <Link
-            href="/materiel"
+            href="/wishlist"
             className="px-6 py-3 bg-green-600 text-white rounded-md hover:bg-green-700 transition"
           >
-            Ajouter du matériel
+            Proposer du matériel
           </Link>
         </div>
       </section>

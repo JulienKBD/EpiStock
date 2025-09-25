@@ -46,7 +46,7 @@ export default function MaterielFilter({
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetContent
         side="right"
-        className="w-[400px] p-6 bg-white overflow-visible z-[60]"
+        className="w-[400px] p-6 bg-slate-200 overflow-visible z-[60]"
       >
         <SheetHeader>
           <SheetTitle className="text-xl font-bold">Filtres Matériel</SheetTitle>
@@ -56,7 +56,7 @@ export default function MaterielFilter({
         <div className="mt-6">
           <Label htmlFor="type">Type</Label>
           <Select value={typeFilter} onValueChange={setTypeFilter}>
-            <SelectTrigger id="type" className="mt-1 w-full">
+            <SelectTrigger id="type" className="mt-1 w-full bg-white">
               <SelectValue placeholder="Sélectionner un type" />
             </SelectTrigger>
             <SelectContent className="z-[70] bg-white border border-slate-200 shadow-lg">
@@ -73,7 +73,7 @@ export default function MaterielFilter({
         <div className="mt-4">
           <Label htmlFor="marque">Marque</Label>
           <Select value={marqueFilter} onValueChange={setMarqueFilter}>
-            <SelectTrigger id="marque" className="mt-1 w-full">
+            <SelectTrigger id="marque" className="mt-1 w-full bg-white">
               <SelectValue placeholder="Sélectionner une marque" />
             </SelectTrigger>
             <SelectContent className="z-[70] bg-white border border-slate-200 shadow-lg">
@@ -95,7 +95,7 @@ export default function MaterielFilter({
             min={0}
             max={1000}
             step={1}
-            className="mt-2 h-5"
+            className="mt-2 h-5 bg-white rounded-xl"
           />
           <div className="flex justify-between text-sm mt-1 text-slate-700">
             <span>{valeurFilter[0]}€</span>
@@ -107,7 +107,7 @@ export default function MaterielFilter({
         <div className="mt-4">
           <Label htmlFor="etat">État</Label>
           <Select value={etatFilter} onValueChange={setEtatFilter}>
-            <SelectTrigger id="etat" className="mt-1 w-full">
+            <SelectTrigger id="etat" className="mt-1 w-full bg-white">
               <SelectValue placeholder="Sélectionner l'état" />
             </SelectTrigger>
             <SelectContent className="z-[70] bg-white border border-slate-200 shadow-lg">
@@ -124,7 +124,7 @@ export default function MaterielFilter({
         <div className="mt-4">
           <Label htmlFor="emplacement">Emplacement</Label>
           <Select value={emplacementFilter} onValueChange={setEmplacementFilter}>
-            <SelectTrigger id="emplacement" className="mt-1 w-full">
+            <SelectTrigger id="emplacement" className="mt-1 w-full bg-white">
               <SelectValue placeholder="Sélectionner un emplacement" />
             </SelectTrigger>
             <SelectContent className="z-[70] bg-white border border-slate-200 shadow-lg">

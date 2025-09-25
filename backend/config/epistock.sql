@@ -19,7 +19,7 @@ CREATE TABLE users (
 -- Table du matériel
 CREATE TABLE materiel (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
-    `nom` VARCHAR(150) NOT NULL,
+    `name` VARCHAR(150) NOT NULL,
     `type` VARCHAR(100) NOT NULL,
     `numero_serie` VARCHAR(100) UNIQUE,
     `marque` VARCHAR(100),
