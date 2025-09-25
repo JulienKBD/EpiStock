@@ -31,28 +31,31 @@ const prio = (p: Ticket["priority"]) => {
 
 export default function TicketsTable({ data }: { data: Ticket[] }): ReactElement {
   return (
-    <div className="overflow-hidden rounded-lg border bg-white/70 dark:bg-slate-900/30">
+    <div className="overflow-hidden rounded-xl border border-slate-200/80 dark:border-slate-800 bg-gradient-to-br from-white/70 to-white/30 dark:from-slate-900/40 dark:to-slate-900/10 backdrop-blur-sm shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset]">
       <table className="w-full text-sm">
-        <thead className="bg-slate-100/80 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300">
-          <tr>
-            <th className="text-left px-4 py-2 font-medium">Ticket</th>
-            <th className="text-left px-4 py-2 font-medium">Demandeur</th>
-            <th className="text-left px-4 py-2 font-medium">Statut</th>
-            <th className="text-left px-4 py-2 font-medium">Priorité</th>
-            <th className="text-left px-4 py-2 font-medium">MAJ</th>
+        <thead className="text-slate-600 dark:text-slate-300">
+          <tr className="border-b border-slate-200/70 dark:border-slate-800/70 bg-slate-50/60 dark:bg-slate-900/20">
+            <th className="text-left px-4 py-3 font-semibold">Ticket</th>
+            <th className="text-left px-4 py-3 font-semibold">Demandeur</th>
+            <th className="text-left px-4 py-3 font-semibold">Statut</th>
+            <th className="text-left px-4 py-3 font-semibold">Priorité</th>
+            <th className="text-left px-4 py-3 font-semibold">MAJ</th>
           </tr>
         </thead>
         <tbody>
           {data.map((t, i) => (
             <tr
               key={t.id}
-              className={i % 2 ? "bg-slate-50/50 dark:bg-slate-900/10" : ""}
+              className={
+                (i % 2 ? "bg-slate-50/40 dark:bg-slate-900/10 " : "") +
+                "hover:bg-slate-100/60 dark:hover:bg-slate-800/40 transition-colors"
+              }
             >
-              <td className="px-4 py-2 font-medium text-slate-800 dark:text-slate-100">#{t.id} • {t.subject}</td>
-              <td className="px-4 py-2 text-slate-600 dark:text-slate-300">{t.requester}</td>
-              <td className="px-4 py-2"><span className={`px-2 py-0.5 rounded-full text-xs ${badge(t.status)}`}>{t.status}</span></td>
-              <td className={`px-4 py-2 ${prio(t.priority)}`}>{t.priority}</td>
-              <td className="px-4 py-2 text-slate-500">{t.updatedAt}</td>
+              <td className="px-4 py-3 font-medium text-slate-800 dark:text-slate-100">#{t.id} • {t.subject}</td>
+              <td className="px-4 py-3 text-slate-600 dark:text-slate-300">{t.requester}</td>
+              <td className="px-4 py-3"><span className={`px-2 py-0.5 rounded-full text-xs ${badge(t.status)}`}>{t.status}</span></td>
+              <td className={`px-4 py-3 ${prio(t.priority)}`}>{t.priority}</td>
+              <td className="px-4 py-3 text-slate-500">{t.updatedAt}</td>
             </tr>
           ))}
         </tbody>

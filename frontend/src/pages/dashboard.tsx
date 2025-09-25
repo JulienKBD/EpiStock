@@ -1,15 +1,14 @@
-import { ReactElement, useMemo } from "react";
-import Sidebar from "@/components/dashboard/Sidebar";
+import { ReactElement, useMemo, useState } from "react";
 import StatCard from "@/components/dashboard/StatCard";
 import TicketsTable from "@/components/dashboard/TicketsTable";
 import ActivityList, { ActivityIcons } from "@/components/dashboard/ActivityList";
+import DashboardFilter from "@/components/dashboard/DashboardFilter";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { PlusCircle, Filter, RefreshCw, Ticket, Monitor, Users } from "lucide-react";
 
 export default function Dashboard(): ReactElement {
-  // Mock data for the first version; can be wired to backend later
-  const tickets = useMemo(
+  const allTickets = useMemo(
     () => [
       { id: 1324, subject: "Changement écran salle A", requester: "Jean D.", status: "En cours" as const, priority: "Haute" as const, updatedAt: "Il y a 2h" },
       { id: 1323, subject: "Badge non reconnu", requester: "Clara M.", status: "Nouveau" as const, priority: "Moyenne" as const, updatedAt: "Il y a 5h" },
@@ -18,6 +17,21 @@ export default function Dashboard(): ReactElement {
     ],
     []
   );
+
+  const [filtersOpen, setFiltersOpen] = useState(false);
+  const [status, setStatus] = useState<string>("Tous");
+  const [priority, setPriority] = useState<string>("Toutes");
+  const [search, setSearch] = useState<string>("");
+
+  const tickets = useMemo(() => {
+    return allTickets.filter((t) => {
+      const statusOk = status === "Tous" || t.status === status;
+      const prioOk = priority === "Toutes" || t.priority === priority;
+      const q = search.trim().toLowerCase();
+      const searchOk = !q || `${t.id} ${t.subject} ${t.requester}`.toLowerCase().includes(q);
+      return statusOk && prioOk && searchOk;
+    });
+  }, [allTickets, status, priority, search]);
 
   const activities = useMemo(
     () => [
@@ -30,57 +44,64 @@ export default function Dashboard(): ReactElement {
   );
 
   return (
-    <div className="flex gap-6">
-      <Sidebar />
-
-      <div className="flex-1 space-y-6">
-        {/* Header actions similar to GLPI: title + filters */}
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-          <div>
-            <h1 className="text-2xl font-bold">Tableau de bord</h1>
-            <p className="text-sm text-slate-500">Vue d'ensemble des tickets, matériels et utilisateurs</p>
-          </div>
-          <div className="flex gap-2">
-            <Select>
-              <SelectTrigger aria-label="Période">
-                <SelectValue placeholder="7 derniers jours" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="7">7 derniers jours</SelectItem>
-                <SelectItem value="30">30 jours</SelectItem>
-                <SelectItem value="90">90 jours</SelectItem>
-              </SelectContent>
-            </Select>
-            <Button variant="outline" size="sm"><Filter className="h-4 w-4" />Filtres</Button>
-            <Button variant="outline" size="sm"><RefreshCw className="h-4 w-4" />Actualiser</Button>
-            <Button size="sm" className="bg-blue-600 hover:bg-blue-700"><PlusCircle className="h-4 w-4" />Nouveau ticket</Button>
-          </div>
+    <div className="flex-1 space-y-6 max-w-7xl mx-auto w-full">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div>
+          <h1 className="text-2xl font-bold">Tableau de bord</h1>
+          <p className="text-sm text-slate-500">Vue d'ensemble des tickets, matériels et utilisateurs</p>
         </div>
-
-        {/* Stats */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
-          <StatCard title="Tickets ouverts" value={42} trend={{ value: 6, direction: "up" }} icon={<Ticket className="h-4 w-4" />} accent="blue" />
-          <StatCard title="Matériel total" value={318} trend={{ value: 2, direction: "up" }} icon={<Monitor className="h-4 w-4" />} accent="green" />
-          <StatCard title="Utilisateurs" value={127} trend={{ value: 1, direction: "down" }} icon={<Users className="h-4 w-4" />} accent="orange" />
-          <StatCard title="Tickets en attente" value={5} icon={<Ticket className="h-4 w-4" />} accent="red" />
-        </div>
-
-        {/* Main content */}
-        <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
-          <div className="xl:col-span-2 space-y-4">
-            <div className="flex items-center justify-between">
-              <h2 className="text-lg font-semibold">Tickets récents</h2>
-              <Button variant="link" className="px-0">Voir tous</Button>
-            </div>
-            <TicketsTable data={tickets} />
-          </div>
-
-          <div className="space-y-4">
-            <h2 className="text-lg font-semibold">Activité récente</h2>
-            <ActivityList items={activities as any} />
-          </div>
+        <div className="flex gap-2">
+          <Select>
+            <SelectTrigger aria-label="Période">
+              <SelectValue placeholder="7 derniers jours" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="7">7 derniers jours</SelectItem>
+              <SelectItem value="30">30 jours</SelectItem>
+              <SelectItem value="90">90 jours</SelectItem>
+            </SelectContent>
+          </Select>
+          <Button variant="outline" size="sm" onClick={() => setFiltersOpen(true)}><Filter className="h-4 w-4" />Filtres</Button>
+          <Button variant="outline" size="sm"><RefreshCw className="h-4 w-4" />Actualiser</Button>
+          <Button size="sm" className="bg-blue-600 hover:bg-blue-700"><PlusCircle className="h-4 w-4" />Nouveau ticket</Button>
         </div>
       </div>
+
+      {/* Stats */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+        <StatCard title="Tickets ouverts" value={42} trend={{ value: 6, direction: "up" }} icon={<Ticket className="h-4 w-4" />} accent="blue" />
+        <StatCard title="Matériel total" value={318} trend={{ value: 2, direction: "up" }} icon={<Monitor className="h-4 w-4" />} accent="green" />
+        <StatCard title="Utilisateurs" value={127} trend={{ value: 1, direction: "down" }} icon={<Users className="h-4 w-4" />} accent="orange" />
+        <StatCard title="Tickets en attente" value={5} icon={<Ticket className="h-4 w-4" />} accent="red" />
+      </div>
+
+      {/* Main content */}
+      <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
+        <div className="xl:col-span-2 space-y-4">
+          <div className="flex items-center justify-between">
+            <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-500">Tickets récents</h2>
+            <Button variant="link" className="px-0">Voir tous</Button>
+          </div>
+          <TicketsTable data={tickets} />
+        </div>
+
+        <div className="space-y-4">
+          <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-500">Activité récente</h2>
+          <ActivityList items={activities as any} />
+        </div>
+      </div>
+
+      {/* Filters Sheet */}
+      <DashboardFilter
+        open={filtersOpen}
+        setOpen={setFiltersOpen}
+        status={status}
+        setStatus={setStatus}
+        priority={priority}
+        setPriority={setPriority}
+        search={search}
+        setSearch={setSearch}
+      />
     </div>
   );
 }
