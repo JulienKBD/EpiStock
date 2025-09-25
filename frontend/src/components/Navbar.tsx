@@ -13,34 +13,34 @@ import { DialogTitle, DialogDescription } from "@radix-ui/react-dialog";
 
 export default function Navbar(): ReactElement {
   return (
-    <nav className="w-full border-b bg-slate-900/95 px-6 py-3 shadow-md backdrop-blur-md">
+    <nav className="w-full sticky top-0 z-40 border-b border-slate-200/70 dark:border-slate-800/70 bg-white/70 dark:bg-slate-900/80 backdrop-blur supports-[backdrop-filter]:bg-white/50 px-4 py-2">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         {/* Logo + titre */}
         <Link
           href="/"
-          className="ml-4 text-2xl md:text-3xl font-bold text-slate-200 flex items-center"
+          className="ml-2 text-lg md:text-xl font-semibold text-slate-900 dark:text-slate-200 flex items-center gap-2"
         >
-          <div className="relative w-16 h-16 md:w-20 md:h-20 flex-shrink-0">
+          <div className="relative w-8 h-8 md:w-9 md:h-9 flex-shrink-0">
             <Image
               src="/favicon.ico"
               alt="EpiStock Logo"
               className="object-contain"
-              width={400}
-              height={400}
+              width={128}
+              height={128}
             />
           </div>
-          EpiStock
+          <span className="tracking-tight">EpiStock</span>
         </Link>
 
         {/* Desktop menu */}
         <div className="hidden md:flex">
           <NavigationMenu>
-            <NavigationMenuList className="flex space-x-6">
+            <NavigationMenuList className="flex space-x-4">
               <NavigationMenuItem>
                 <NavigationMenuLink asChild>
                   <Link
                     href="/docs"
-                    className="text-slate-50 hover:text-slate-400"
+                    className="text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white text-sm font-medium"
                   >
                     Documentation
                   </Link>
@@ -50,7 +50,7 @@ export default function Navbar(): ReactElement {
                 <NavigationMenuLink asChild>
                   <Link
                     href="/materiel"
-                    className="text-slate-50 hover:text-slate-400"
+                    className="text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white text-sm font-medium"
                   >
                     Matériel
                   </Link>
@@ -60,7 +60,7 @@ export default function Navbar(): ReactElement {
                 <NavigationMenuLink asChild>
                   <Link
                     href="/dashboard"
-                    className="text-slate-50 hover:text-slate-400"
+                    className="text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white text-sm font-medium"
                   >
                     Dashboard
                   </Link>
@@ -70,7 +70,7 @@ export default function Navbar(): ReactElement {
                 <NavigationMenuLink asChild>
                   <Link
                     href="/wishlist"
-                    className="text-slate-50 hover:text-slate-400"
+                    className="text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white text-sm font-medium"
                   >
                     Liste de souhaits
                   </Link>
@@ -81,10 +81,10 @@ export default function Navbar(): ReactElement {
         </div>
 
         {/* Connexion button (desktop only) */}
-        <div className="hidden md:flex items-center space-x-4">
+        <div className="hidden md:flex items-center space-x-3">
           <Link
             href="/login"
-            className="px-4 py-2 bg-slate-700 text-white rounded-md shadow hover:bg-slate-600 transition font-semibold"
+            className="px-3 py-1.5 bg-slate-800 text-white rounded-md shadow-sm hover:bg-slate-700 transition text-sm font-medium"
           >
             Connexion
           </Link>
@@ -94,14 +94,14 @@ export default function Navbar(): ReactElement {
         <div className="md:hidden">
           <Sheet>
             <SheetTrigger asChild>
-              <button className="p-2 rounded-md hover:bg-slate-200 dark:hover:bg-slate-800">
-                <Menu className="h-6 w-6 text-slate-200" />
+              <button className="p-2 rounded-md hover:bg-slate-200/70 dark:hover:bg-slate-800/70">
+                <Menu className="h-5 w-5 text-slate-900 dark:text-slate-200" />
               </button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-64 bg-slate-50 dark:bg-slate-900 p-6">
+            <SheetContent side="right" className="w-64 bg-slate-50 dark:bg-slate-900 p-5">
               <SheetClose asChild>
-                <button className="absolute top-4 right-4 p-2 rounded-md hover:bg-slate-200 dark:hover:bg-slate-800">
-                  <X className="h-6 w-6 text-slate-200" />
+                <button className="absolute top-3 right-3 p-2 rounded-md hover:bg-slate-200/70 dark:hover:bg-slate-800/70">
+                  <X className="h-5 w-5 text-slate-900 dark:text-slate-200" />
                 </button>
               </SheetClose>
 
@@ -110,22 +110,22 @@ export default function Navbar(): ReactElement {
                 Ce menu vous permet de naviguer vers la documentation, le matériel, le dashboard et de vous connecter.
               </DialogDescription>
 
-              <nav className="flex flex-col space-y-4 mt-8">
-                <Link href="/docs" className="text-slate-50 hover:underline">
+        <nav className="flex flex-col space-y-3 mt-6">
+                <Link href="/docs" className="text-slate-900 dark:text-slate-50 hover:underline">
                   Documentation
                 </Link>
-                <Link href="/materiel" className="text-slate-50 hover:underline">
+                <Link href="/materiel" className="text-slate-900 dark:text-slate-50 hover:underline">
                   Matériel
                 </Link>
-                <Link href="/dashboard" className="text-slate-50 hover:underline">
+                <Link href="/dashboard" className="text-slate-900 dark:text-slate-50 hover:underline">
                   Dashboard
                 </Link>
-                <Link href="/wishlist" className="text-slate-50 hover:underline">
+                <Link href="/wishlist" className="text-slate-900 dark:text-slate-50 hover:underline">
                   Liste de souhaits
                 </Link>
                 <Link
                   href="/login"
-                  className="px-4 py-2 bg-slate-700 text-white rounded-md shadow hover:bg-slate-600 transition font-semibold mt-4 text-center"
+          className="px-3 py-1.5 bg-slate-800 text-white rounded-md shadow-sm hover:bg-slate-700 transition text-sm font-medium mt-4 text-center"
                 >
                   Connexion
                 </Link>
