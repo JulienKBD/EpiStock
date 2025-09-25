@@ -1,7 +1,7 @@
 const express = require('express');
 const { loggingMiddleware, corsMiddleware } = require('./middleware/middleware.js');
 // const authenticateToken = require('./middleware/auth.js');
-// const routerAuth = require('./routes/auth/auth.js');
+const routerAuth = require('./routes/auth/auth.js');
 // const routerUsers = require('./routes/users/users.js');
 const routerMateriel = require('./routes/materiel/materiel.js');
 const notFound = require('./middleware/notFound.js');
@@ -17,9 +17,9 @@ app.use(express.json());
 app.use(loggingMiddleware);
 app.use(corsMiddleware);
 
-// // Authentication
-// app.post('/auth/register', routerAuth);
-// app.post('/auth/login', routerAuth);
+// Authentication
+app.post('/auth/register', routerAuth);
+app.post('/auth/login', routerAuth);
 
 // // Users
 // app.get('/users', routerUsers);

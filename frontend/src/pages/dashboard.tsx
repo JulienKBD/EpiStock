@@ -52,18 +52,18 @@ export default function Dashboard(): ReactElement {
         </div>
         <div className="flex gap-2">
           <Select>
-            <SelectTrigger aria-label="Période">
+            <SelectTrigger aria-label="Période" className="cursor-pointer">
               <SelectValue placeholder="7 derniers jours" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="7">7 derniers jours</SelectItem>
-              <SelectItem value="30">30 jours</SelectItem>
-              <SelectItem value="90">90 jours</SelectItem>
+              <SelectItem value="7" className="cursor-pointer">7 derniers jours</SelectItem>
+              <SelectItem value="30" className="cursor-pointer">30 jours</SelectItem>
+              <SelectItem value="90" className="cursor-pointer">90 jours</SelectItem>
             </SelectContent>
           </Select>
-          <Button variant="outline" size="sm" onClick={() => setFiltersOpen(true)}><Filter className="h-4 w-4" />Filtres</Button>
-          <Button variant="outline" size="sm"><RefreshCw className="h-4 w-4" />Actualiser</Button>
-          <Button size="sm" className="bg-blue-600 hover:bg-blue-700"><PlusCircle className="h-4 w-4" />Nouveau ticket</Button>
+          <Button variant="outline" size="sm" className="cursor-pointer" onClick={() => setFiltersOpen(true)}><Filter className="h-4 w-4" />Filtres</Button>
+          <Button variant="outline" size="sm" className="cursor-pointer"><RefreshCw className="h-4 w-4" />Actualiser</Button>
+          <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-white cursor-pointer"><PlusCircle className="h-4 w-4" />Nouveau ticket</Button>
         </div>
       </div>
 

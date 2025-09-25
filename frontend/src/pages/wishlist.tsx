@@ -1,12 +1,10 @@
-import WishListCard from "@/components/WishListCard";
-import AddWishListCard from "@/components/AddWishListCard";
+import AddWishListButton from "@/components/AddWishListButton";
 import { ReactElement } from "react";
 
 export default function WishListPage(): ReactElement {
   return (
     <main className="flex flex-col items-center">
-      <AddWishListCard />
-      <WishListCard />
+      <AddWishListButton />
     </main>
   );
 }

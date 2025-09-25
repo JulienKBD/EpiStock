@@ -31,6 +31,19 @@ CREATE TABLE materiel (
     `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
+-- Table de la liste des souhaits
+CREATE TABLE wishlist (
+    `id` INT AUTO_INCREMENT PRIMARY KEY,
+    `name` VARCHAR(150) NOT NULL,
+    `marque` VARCHAR(100),
+    `valeur` DECIMAL(10,2),
+    `image_url` TEXT,
+    `like` INT NOT NULL,
+    `view` INT NOT NULL,
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
 -- Table des attributions (historique des prêts)
 CREATE TABLE attributions (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
@@ -42,3 +55,10 @@ CREATE TABLE attributions (
     CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     CONSTRAINT fk_materiel FOREIGN KEY (materiel_id) REFERENCES materiel(id) ON DELETE CASCADE
 );
+
+-- INSERT INTO materiel (name, type, marque, valeur, etat, emplacement, image_url, numero_serie)
+-- VALUES
+--     ('Câble HDMI', 'Accessoire', 'Belkin', 15.00, 'En prêt', 'Salle ALAN', '/assets/HDMI-Cable.png', 'HDMI123456'),
+--     ('Ordinateur Dell', 'Ordinateur', 'Dell', 800.00, 'En panne', 'Salle Steve', '/assets/Dell_Laptop.png', 'DELL123456'),
+--     ('Écran LG', 'Écran', 'LG', 200.00, 'Disponible', 'Salle Hub', '/assets/LG_Monitor.png', 'LG123456'),
+--     ('Écran LG', 'Écran', 'LG', 200.00, 'En prêt', 'Salle Denis', '/assets/LG_Monitor.png', 'LG789456');
