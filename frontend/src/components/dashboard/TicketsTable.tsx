@@ -1,0 +1,62 @@
+import { ReactElement } from "react";
+
+type Ticket = {
+  id: number;
+  subject: string;
+  requester: string;
+  status: "Nouveau" | "En cours" | "En attente" | "Résolu";
+  priority: "Basse" | "Moyenne" | "Haute" | "Urgente";
+  updatedAt: string;
+};
+
+const badge = (status: Ticket["status"]) => {
+  const map: Record<Ticket["status"], string> = {
+    Nouveau: "bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-200",
+    "En cours": "bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-100",
+    "En attente": "bg-slate-200 text-slate-700 dark:bg-slate-800/50 dark:text-slate-200",
+    Résolu: "bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-200",
+  };
+  return map[status];
+};
+
+const prio = (p: Ticket["priority"]) => {
+  const map: Record<Ticket["priority"], string> = {
+    Basse: "text-slate-500",
+    Moyenne: "text-amber-600",
+    Haute: "text-orange-600",
+    Urgente: "text-red-600 font-semibold",
+  };
+  return map[p];
+};
+
+export default function TicketsTable({ data }: { data: Ticket[] }): ReactElement {
+  return (
+    <div className="overflow-hidden rounded-lg border bg-white/70 dark:bg-slate-900/30">
+      <table className="w-full text-sm">
+        <thead className="bg-slate-100/80 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300">
+          <tr>
+            <th className="text-left px-4 py-2 font-medium">Ticket</th>
+            <th className="text-left px-4 py-2 font-medium">Demandeur</th>
+            <th className="text-left px-4 py-2 font-medium">Statut</th>
+            <th className="text-left px-4 py-2 font-medium">Priorité</th>
+            <th className="text-left px-4 py-2 font-medium">MAJ</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.map((t, i) => (
+            <tr
+              key={t.id}
+              className={i % 2 ? "bg-slate-50/50 dark:bg-slate-900/10" : ""}
+            >
+              <td className="px-4 py-2 font-medium text-slate-800 dark:text-slate-100">#{t.id} • {t.subject}</td>
+              <td className="px-4 py-2 text-slate-600 dark:text-slate-300">{t.requester}</td>
+              <td className="px-4 py-2"><span className={`px-2 py-0.5 rounded-full text-xs ${badge(t.status)}`}>{t.status}</span></td>
+              <td className={`px-4 py-2 ${prio(t.priority)}`}>{t.priority}</td>
+              <td className="px-4 py-2 text-slate-500">{t.updatedAt}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
