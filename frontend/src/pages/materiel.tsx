@@ -56,6 +56,16 @@ export default function MaterielPage(): ReactElement {
       image: "/assets/LG_Monitor.png",
       numeroSerie: "LG123456",
     },
+    {
+      nom: "Écran LG",
+      type: "Écran",
+      marque: "LG",
+      valeur: 200,
+      etat: "En prêt",
+      emplacement: "Salle Denis",
+      image: "/assets/LG_Monitor.png",
+      numeroSerie: "LG789456",
+    },
   ];
 
   const materielsFiltres = materiels.filter(item => {
@@ -70,7 +80,7 @@ export default function MaterielPage(): ReactElement {
   });
 
   return (
-    <main className="p-4 space-y-6">
+    <main className="space-y-6">
       {/* Bouton pour ouvrir le filtre */}
       <Button
         onClick={() => setOpen(true)}
@@ -97,9 +107,13 @@ export default function MaterielPage(): ReactElement {
       />
 
       {/* Liste des matériels filtrés */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="max-w-8xl mx-auto grid md:grid-cols-4 pt-5 justify-items-center">
         {materielsFiltres.map(item => (
-          <HardwareCard key={item.numeroSerie} {...item} valeur={`${item.valeur}€`} />
+          <HardwareCard
+            key={item.numeroSerie}
+            {...item}
+            valeur={`${item.valeur}€`}
+          />
         ))}
         {materielsFiltres.length === 0 && (
           <p className="text-center col-span-full text-gray-500 dark:text-gray-400">
@@ -107,6 +121,7 @@ export default function MaterielPage(): ReactElement {
           </p>
         )}
       </div>
+
     </main>
   );
 }
