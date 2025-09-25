@@ -13,12 +13,12 @@ import { DialogTitle, DialogDescription } from "@radix-ui/react-dialog";
 
 export default function Navbar(): ReactElement {
   return (
-    <nav className="w-full border-b bg-slate-50/80 dark:bg-slate-900/95 px-6 py-3 shadow-md backdrop-blur-md">
+    <nav className="w-full border-b bg-slate-900/95 px-6 py-3 shadow-md backdrop-blur-md">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         {/* Logo + titre */}
         <Link
           href="/"
-          className="ml-4 text-2xl md:text-3xl font-bold text-slate-900 dark:text-slate-200 flex items-center"
+          className="ml-4 text-2xl md:text-3xl font-bold text-slate-200 flex items-center"
         >
           <div className="relative w-16 h-16 md:w-20 md:h-20 flex-shrink-0">
             <Image
@@ -40,7 +40,7 @@ export default function Navbar(): ReactElement {
                 <NavigationMenuLink asChild>
                   <Link
                     href="/docs"
-                    className="text-slate-900 dark:text-slate-50 hover:text-slate-500 dark:hover:text-slate-400"
+                    className="text-slate-50 hover:text-slate-400"
                   >
                     Documentation
                   </Link>
@@ -50,7 +50,7 @@ export default function Navbar(): ReactElement {
                 <NavigationMenuLink asChild>
                   <Link
                     href="/materiel"
-                    className="text-slate-900 dark:text-slate-50 hover:text-slate-500 dark:hover:text-slate-400"
+                    className="text-slate-50 hover:text-slate-400"
                   >
                     Matériel
                   </Link>
@@ -60,7 +60,7 @@ export default function Navbar(): ReactElement {
                 <NavigationMenuLink asChild>
                   <Link
                     href="/dashboard"
-                    className="text-slate-900 dark:text-slate-50 hover:text-slate-500 dark:hover:text-slate-400"
+                    className="text-slate-50 hover:text-slate-400"
                   >
                     Dashboard
                   </Link>
@@ -70,7 +70,7 @@ export default function Navbar(): ReactElement {
                 <NavigationMenuLink asChild>
                   <Link
                     href="/wishlist"
-                    className="text-slate-900 dark:text-slate-50 hover:text-slate-500 dark:hover:text-slate-400"
+                    className="text-slate-50 hover:text-slate-400"
                   >
                     Liste de souhaits
                   </Link>
@@ -95,13 +95,13 @@ export default function Navbar(): ReactElement {
           <Sheet>
             <SheetTrigger asChild>
               <button className="p-2 rounded-md hover:bg-slate-200 dark:hover:bg-slate-800">
-                <Menu className="h-6 w-6 text-slate-900 dark:text-slate-200" />
+                <Menu className="h-6 w-6 text-slate-200" />
               </button>
             </SheetTrigger>
             <SheetContent side="right" className="w-64 bg-slate-50 dark:bg-slate-900 p-6">
               <SheetClose asChild>
                 <button className="absolute top-4 right-4 p-2 rounded-md hover:bg-slate-200 dark:hover:bg-slate-800">
-                  <X className="h-6 w-6 text-slate-900 dark:text-slate-200" />
+                  <X className="h-6 w-6 text-slate-200" />
                 </button>
               </SheetClose>
 
@@ -111,16 +111,16 @@ export default function Navbar(): ReactElement {
               </DialogDescription>
 
               <nav className="flex flex-col space-y-4 mt-8">
-                <Link href="/docs" className="text-slate-900 dark:text-slate-50 hover:underline">
+                <Link href="/docs" className="text-slate-50 hover:underline">
                   Documentation
                 </Link>
-                <Link href="/materiel" className="text-slate-900 dark:text-slate-50 hover:underline">
+                <Link href="/materiel" className="text-slate-50 hover:underline">
                   Matériel
                 </Link>
-                <Link href="/dashboard" className="text-slate-900 dark:text-slate-50 hover:underline">
+                <Link href="/dashboard" className="text-slate-50 hover:underline">
                   Dashboard
                 </Link>
-                <Link href="/wishlist" className="text-slate-900 dark:text-slate-50 hover:underline">
+                <Link href="/wishlist" className="text-slate-50 hover:underline">
                   Liste de souhaits
                 </Link>
                 <Link

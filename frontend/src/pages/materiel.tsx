@@ -84,7 +84,7 @@ export default function MaterielPage(): ReactElement {
       {/* Bouton pour ouvrir le filtre */}
       <Button
         onClick={() => setOpen(true)}
-        className="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg shadow-md transition"
+        className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg shadow-md transition"
       >
         <SlidersHorizontal className="w-5 h-5" />
         Filtres
@@ -116,7 +116,7 @@ export default function MaterielPage(): ReactElement {
           />
         ))}
         {materielsFiltres.length === 0 && (
-          <p className="text-center col-span-full text-gray-500 dark:text-gray-400">
+          <p className="text-center col-span-full text-gray-500">
             Aucun matériel ne correspond aux filtres.
           </p>
         )}
