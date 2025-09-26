@@ -32,6 +32,7 @@ app.post('/auth/login', routerAuth);
 // Materiel
 app.get('/materiel', routerMateriel);
 app.get('/materiel/:materielId', routerMateriel);
+app.get('/materiel/:materielType', routerMateriel);
 
 // 404 Not Found
 app.use(notFound);

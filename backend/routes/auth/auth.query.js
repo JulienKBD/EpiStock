@@ -1,7 +1,7 @@
 const createUser = `
     INSERT INTO users
-    (email, password, name, role)
-    VALUES (?, ?, ?, ?);
+    (email, password, name)
+    VALUES (?, ?, ?);
 `;
 
 const getUserByEmail = `

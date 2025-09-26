@@ -7,9 +7,9 @@ const { createUser, getUserByEmail } = require('./auth.query.js');
 
 // Register endpoint
 router.post('/auth/register', async (req, res) => {
-  const { email, password, name, role } = req.body;
+  const { email, password, name } = req.body;
 
-  if (!email || !password || !name || !role)
+  if (!email || !password || !name)
     return res.status(400).json({ msg: 'Bad parameter' });
 
   let conn;
@@ -19,8 +19,8 @@ router.post('/auth/register', async (req, res) => {
     // Hash password
     const hash = await bcrypt.hash(password, 10);
 
-    // INSERT user including role
-    const insertResult = await conn.query(createUser, [email, hash, name, role]);
+    // INSERT user
+    const insertResult = await conn.query(createUser, [email, hash, name]);
     console.log('Insert Result:', insertResult);
 
     // SELECT user to generate token

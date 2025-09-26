@@ -9,7 +9,14 @@ const getMaterielById = `
     WHERE id = ?;
 `;
 
+const getMaterielByType = `
+    SELECT *
+    FROM materiel
+    WHERE type = ?;
+`;
+
 module.exports = {
     getMateriel,
-    getMaterielById
+    getMaterielById,
+    getMaterielByType
 };
