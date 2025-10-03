@@ -42,7 +42,7 @@ export default function Navbar(): ReactElement {
                     href="/docs"
                     className="text-slate-50 hover:text-slate-400"
                   >
-                    Documentation
+                    Nouveau
                   </Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
@@ -112,7 +112,7 @@ export default function Navbar(): ReactElement {
 
               <nav className="flex flex-col space-y-4 mt-8">
                 <Link href="/docs" className="text-slate-50 hover:underline">
-                  Documentation
+                  Nouveau
                 </Link>
                 <Link href="/materiel" className="text-slate-50 hover:underline">
                   Matériel

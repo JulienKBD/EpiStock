@@ -10,6 +10,8 @@ export type Materiel = {
   etat: string;
   emplacement: string;
   image_url?: string;
+  created_at?: string;
+  updated_at?: string;
 };
 
 export async function fetchMaterielCount(): Promise<number> {
@@ -34,5 +36,30 @@ export async function fetchMaterielCount(): Promise<number> {
   } catch (e) {
     console.error(e);
     return 0;
+  }
+}
+
+export async function fetchRecentMateriel(limit = 5): Promise<Materiel[]> {
+  try {
+    const res = await fetch(`${API_BASE}/materiel`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+      cache: "no-store",
+    });
+
+    if (res.status === 404) return [];
+    if (!res.ok) throw new Error(`Failed to fetch materiel: ${res.status}`);
+
+    const items = (await res.json()) as Materiel[];
+    const withDates = items.map((m) => ({ ...m }));
+    withDates.sort((a, b) => {
+      const da = a.created_at ? new Date(a.created_at).getTime() : 0;
+      const db = b.created_at ? new Date(b.created_at).getTime() : 0;
+      return db - da;
+    });
+    return withDates.slice(0, limit);
+  } catch (e) {
+    console.error(e);
+    return [];
   }
 }
