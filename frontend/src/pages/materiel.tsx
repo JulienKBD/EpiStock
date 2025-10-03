@@ -2,21 +2,12 @@
 
 import * as React from "react";
 import { ReactElement, useEffect, useState } from "react";
-import HardwareCard from "@/components/HardwareCard";
-import MaterielFilter from "@/components/MaterielFilter";
+import HardwareTable from "@/components/materiel/MaterielTable";
+import MaterielFilter from "@/components/materiel/MaterielFilter";
 import { Button } from "@/components/ui/button";
+import AddMaterielButton from "@/components/materiel/AddMaterielButton"
 import { SlidersHorizontal } from "lucide-react";
-
-interface Materiel {
-  nom: string;
-  type: string;
-  marque: string;
-  valeur: number;
-  etat: string;
-  emplacement: string;
-  image: string;
-  numeroSerie: string;
-}
+import type { Materiel } from "@/types/materiel";
 
 export default function MaterielPage(): ReactElement {
   const [open, setOpen] = useState(false);
@@ -41,7 +32,7 @@ export default function MaterielPage(): ReactElement {
         const data = await response.json();
 
         const mappedData: Materiel[] = data.map((item: any) => ({
-          nom: item.name,
+          name: item.name,
           type: item.type,
           marque: item.marque,
           valeur: Number(item.valeur),
@@ -76,14 +67,19 @@ export default function MaterielPage(): ReactElement {
 
   return (
     <main className="space-y-6">
-      {/* Bouton pour ouvrir le filtre */}
-      <Button
-        onClick={() => setOpen(true)}
-        className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white cursor-pointer px-4 py-2 rounded-lg shadow-md transition"
-      >
-        <SlidersHorizontal className="w-5 h-5" />
-        Filtres
-      </Button>
+      <div className="flex items-center gap-2">
+        {/* Bouton pour ouvrir le filtre */}
+        <Button
+          onClick={() => setOpen(true)}
+          className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white cursor-pointer px-4 py-2 rounded-lg shadow-md transition"
+          >
+          <SlidersHorizontal className="w-5 h-5" />
+          Filtres
+        </Button>
+
+        {/* Bouton pour ajouter du materiel */}
+        <AddMaterielButton />
+      </div>
 
       {/* Composant de filtre */}
       <MaterielFilter
@@ -107,16 +103,11 @@ export default function MaterielPage(): ReactElement {
 
       {/* Liste des matériels filtrés */}
       {!loading && !error && (
-        <div className="max-w-8xl mx-auto grid md:grid-cols-4 pt-5 justify-items-center">
-          {materielsFiltres.map((item) => (
-            <HardwareCard
-              key={item.numeroSerie}
-              {...item}
-              valeur={`${item.valeur}€`}
-            />
-          ))}
-          {materielsFiltres.length === 0 && (
-            <p className="text-center col-span-full text-gray-500">
+        <div className="max-w-8xl mx-auto pt-5">
+          {materielsFiltres.length > 0 ? (
+            <HardwareTable data={materielsFiltres} />
+          ) : (
+            <p className="text-center text-gray-500">
               Aucun matériel ne correspond aux filtres.
             </p>
           )}

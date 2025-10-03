@@ -1,4 +1,4 @@
-import WishListCard from "@/components/WishListCard";
+import WishListCard from "@/components/wishlist/ProposeMaterialCard";
 import { ReactElement } from "react";
 
 export default function AddWishListPage(): ReactElement {

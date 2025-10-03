@@ -4,6 +4,7 @@ const { loggingMiddleware, corsMiddleware } = require('./middleware/middleware.j
 const routerAuth = require('./routes/auth/auth.js');
 // const routerUsers = require('./routes/users/users.js');
 const routerMateriel = require('./routes/materiel/materiel.js');
+const routerWishlist = require('./routes/wishlist/wishlist.js');
 const notFound = require('./middleware/notFound.js');
 const cors = require('cors');
 require('dotenv').config();
@@ -33,6 +34,12 @@ app.post('/auth/login', routerAuth);
 app.get('/materiel', routerMateriel);
 app.get('/materiel/:materielId', routerMateriel);
 app.get('/materiel/:materielType', routerMateriel);
+app.post('/materiel', routerMateriel);
+
+// WishList
+app.get('/wishlist', routerWishlist);
+app.get('/wishlist/:wishlistId', routerWishlist);
+app.post('/wishlist', routerWishlist);
 
 // 404 Not Found
 app.use(notFound);

@@ -9,7 +9,7 @@ export default function AddWishListCard(): ReactElement {
   const router = useRouter();
 
   const handleClick = () => {
-    const token = localStorage.getItem("accessToken");
+    const token = localStorage.getItem("token");
 
     if (token) {
       router.push("/addWishlist");

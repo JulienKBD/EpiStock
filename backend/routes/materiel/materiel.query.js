@@ -15,8 +15,14 @@ const getMaterielByType = `
     WHERE type = ?;
 `;
 
+const createMateriel = `
+    INSERT INTO materiel (name, type, numero_serie, marque, valeur, etat, emplacement, image_url)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?);
+`
+
 module.exports = {
     getMateriel,
     getMaterielById,
-    getMaterielByType
+    getMaterielByType,
+    createMateriel
 };

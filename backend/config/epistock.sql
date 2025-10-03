@@ -38,8 +38,6 @@ CREATE TABLE wishlist (
     `marque` VARCHAR(100),
     `valeur` DECIMAL(10,2),
     `image_url` TEXT,
-    `like` INT NOT NULL,
-    `view` INT NOT NULL,
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );

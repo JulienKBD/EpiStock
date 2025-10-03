@@ -1,18 +1,44 @@
+"use client";
+
 import { ReactElement, useState } from "react";
 
 export default function ProposeMaterialCard(): ReactElement {
-  const [nom, setNom] = useState("");
-  const [type, setType] = useState("");
+  const [name, setName] = useState("");
   const [marque, setMarque] = useState("");
   const [valeur, setValeur] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log({ nom, type, marque, valeur });
-    setNom("");
-    setType("");
-    setMarque("");
-    setValeur("");
+
+    const newWish = {
+      name,
+      marque,
+      valeur: valeur ? parseFloat(valeur) : null,
+      image_url: imageUrl,
+    };
+
+    try {
+      const response = await fetch("http://localhost:3001/wishlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newWish),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Erreur serveur: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log("Matériel proposé dans la wishlist :", data);
+
+      setName("");
+      setMarque("");
+      setValeur("");
+      setImageUrl("");
+    } catch (error) {
+      console.error("Erreur lors de l'ajout à la wishlist:", error);
+    }
   };
 
   return (
@@ -22,30 +48,20 @@ export default function ProposeMaterialCard(): ReactElement {
       </h3>
 
       <form className="space-y-3" onSubmit={handleSubmit}>
+        {/* Nom */}
         <div className="flex flex-col">
           <label className="text-sm font-medium text-slate-700 dark:text-slate-300">Nom</label>
           <input
             type="text"
-            value={nom}
-            onChange={(e) => setNom(e.target.value)}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             className="mt-1 p-2 border rounded-md border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-50"
             placeholder="Ex: Câble HDMI"
             required
           />
         </div>
 
-        <div className="flex flex-col">
-          <label className="text-sm font-medium text-slate-700 dark:text-slate-300">Type</label>
-          <input
-            type="text"
-            value={type}
-            onChange={(e) => setType(e.target.value)}
-            className="mt-1 p-2 border rounded-md border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-50"
-            placeholder="Ex: Câble"
-            required
-          />
-        </div>
-
+        {/* Marque */}
         <div className="flex flex-col">
           <label className="text-sm font-medium text-slate-700 dark:text-slate-300">Marque</label>
           <input
@@ -57,6 +73,7 @@ export default function ProposeMaterialCard(): ReactElement {
           />
         </div>
 
+        {/* Valeur */}
         <div className="flex flex-col">
           <label className="text-sm font-medium text-slate-700 dark:text-slate-300">Valeur (€)</label>
           <input
@@ -65,6 +82,18 @@ export default function ProposeMaterialCard(): ReactElement {
             onChange={(e) => setValeur(e.target.value)}
             className="mt-1 p-2 border rounded-md border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-50"
             placeholder="Ex: 15"
+          />
+        </div>
+
+        {/* Image URL */}
+        <div className="flex flex-col">
+          <label className="text-sm font-medium text-slate-700 dark:text-slate-300">Image URL</label>
+          <input
+            type="text"
+            value={imageUrl}
+            onChange={(e) => setImageUrl(e.target.value)}
+            className="mt-1 p-2 border rounded-md border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-50"
+            placeholder="Ex: /assets/HDMI-Cable.png"
           />
         </div>
 

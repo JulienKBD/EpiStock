@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ReactElement } from "react";
 import PresentationCard from '@/components/PresentationCard';
-import DashboardCard from '@/components/DashboardCard';
+import DashboardCard from '@/components/dashboard/DashboardCard';
 import { CableIcon, ComputerIcon, MonitorIcon } from "lucide-react";
 
 export default function Home(): ReactElement {

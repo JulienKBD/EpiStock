@@ -77,7 +77,7 @@ export default function MaterielFilter({
               <SelectValue placeholder="Sélectionner une marque" />
             </SelectTrigger>
             <SelectContent className="z-[70] bg-white border border-slate-200 shadow-lg">
-              {["Tous", "Belkin", "Logitech", "Dell", "HP"].map((marque) => (
+              {["Tous", "Belkin", "Logitech", "Dell", "HP", "LG"].map((marque) => (
                 <SelectItem key={marque} value={marque}>
                   {marque}
                 </SelectItem>
