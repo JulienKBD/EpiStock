@@ -47,9 +47,9 @@ router.post('/wishlist', async (req, res) => {
     let conn;
     try {
         conn = await pool.getConnection();
-        const result = await conn.query(createWishList, [name, marque, valeur, image_url]);
-
-        res.status(201).json({ id: result.insertId, ...req.body });
+    const result = await conn.query(createWishList, [name, marque, valeur, image_url]);
+    const insertedId = typeof result.insertId === 'bigint' ? Number(result.insertId) : result.insertId;
+    res.status(201).json({ id: insertedId, ...req.body });
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: 'Erreur lors de l’ajout du matériel.' });

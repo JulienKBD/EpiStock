@@ -31,10 +31,10 @@ const prio = (p: Ticket["priority"]) => {
 
 export default function TicketsTable({ data }: { data: Ticket[] }): ReactElement {
   return (
-    <div className="overflow-hidden rounded-xl border border-slate-200/80 dark:border-slate-800 bg-gradient-to-br from-white/70 to-white/30 dark:from-slate-900/40 dark:to-slate-900/10 backdrop-blur-sm shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset]">
+    <div className="overflow-hidden rounded-lg p-0 bg-slate-300 shadow hover:shadow-lg transition">
       <table className="w-full text-sm">
-        <thead className="text-slate-600 dark:text-slate-300">
-          <tr className="border-b border-slate-200/70 dark:border-slate-800/70 bg-slate-50/60 dark:bg-slate-900/20">
+        <thead className="text-slate-700">
+          <tr className="border-b border-slate-200 bg-slate-200/40">
             <th className="text-left px-4 py-3 font-semibold">Ticket</th>
             <th className="text-left px-4 py-3 font-semibold">Demandeur</th>
             <th className="text-left px-4 py-3 font-semibold">Statut</th>
@@ -46,16 +46,13 @@ export default function TicketsTable({ data }: { data: Ticket[] }): ReactElement
           {data.map((t, i) => (
             <tr
               key={t.id}
-              className={
-                (i % 2 ? "bg-slate-50/40 dark:bg-slate-900/10 " : "") +
-                "hover:bg-slate-100/60 dark:hover:bg-slate-800/40 transition-colors"
-              }
+              className={(i % 2 ? "bg-white/30 " : "") + "hover:bg-white/50 transition-colors"}
             >
-              <td className="px-4 py-3 font-medium text-slate-800 dark:text-slate-100">#{t.id} • {t.subject}</td>
-              <td className="px-4 py-3 text-slate-600 dark:text-slate-300">{t.requester}</td>
+              <td className="px-4 py-3 font-medium text-slate-800">#{t.id} • {t.subject}</td>
+              <td className="px-4 py-3 text-slate-700">{t.requester}</td>
               <td className="px-4 py-3"><span className={`px-2 py-0.5 rounded-full text-xs ${badge(t.status)}`}>{t.status}</span></td>
               <td className={`px-4 py-3 ${prio(t.priority)}`}>{t.priority}</td>
-              <td className="px-4 py-3 text-slate-500">{t.updatedAt}</td>
+              <td className="px-4 py-3 text-slate-600">{t.updatedAt}</td>
             </tr>
           ))}
         </tbody>

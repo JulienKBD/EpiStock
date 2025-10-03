@@ -67,11 +67,17 @@ router.post('/materiel', async (req, res) => {
     let conn;
     try {
         conn = await pool.getConnection();
-        const result = await conn.query(createMateriel, [name, type, numeroSerie, marque, valeur, etat, emplacement, image_url]);
+        const numeroSerieNorm = numeroSerie && String(numeroSerie).trim() !== '' ? String(numeroSerie).trim() : null;
+        const valeurNorm = (valeur === undefined || valeur === null || valeur === '') ? null : valeur;
 
-        res.status(201).json({ id: result.insertId, ...req.body });
+    const result = await conn.query(createMateriel, [name, type, numeroSerieNorm, marque, valeurNorm, etat, emplacement, image_url]);
+    const insertedId = typeof result.insertId === 'bigint' ? Number(result.insertId) : result.insertId;
+    res.status(201).json({ id: insertedId, ...req.body });
     } catch (err) {
         console.error(err);
+        if (err && err.code === 'ER_DUP_ENTRY') {
+            return res.status(409).json({ error: 'Numéro de série déjà existant.' });
+        }
         res.status(500).json({ error: 'Erreur lors de l’ajout du matériel.' });
     } finally {
         if (conn) conn.release();

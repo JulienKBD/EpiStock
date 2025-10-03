@@ -1,11 +1,12 @@
-import { ReactElement, useMemo, useState } from "react";
+import { ReactElement, useEffect, useMemo, useState } from "react";
 import StatCard from "@/components/dashboard/StatCard";
 import TicketsTable from "@/components/dashboard/TicketsTable";
-import ActivityList, { ActivityIcons } from "@/components/dashboard/ActivityList";
+import ActivityList, { ActivityIcons, ActivityItem } from "@/components/dashboard/ActivityList";
 import DashboardFilter from "@/components/dashboard/DashboardFilter";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { PlusCircle, Filter, RefreshCw, Ticket, Monitor, Users } from "lucide-react";
+import { fetchMaterielCount } from "@/lib/api";
 
 export default function Dashboard(): ReactElement {
   const allTickets = useMemo(
@@ -22,6 +23,19 @@ export default function Dashboard(): ReactElement {
   const [status, setStatus] = useState<string>("Tous");
   const [priority, setPriority] = useState<string>("Toutes");
   const [search, setSearch] = useState<string>("");
+  const [materielCount, setMaterielCount] = useState<number | null>(null);
+  const [loadingCounts, setLoadingCounts] = useState<boolean>(false);
+
+  const loadCounts = async () => {
+    setLoadingCounts(true);
+    const count = await fetchMaterielCount();
+    setMaterielCount(count);
+    setLoadingCounts(false);
+  };
+
+  useEffect(() => {
+    void loadCounts();
+  }, []);
 
   const tickets = useMemo(() => {
     return allTickets.filter((t) => {
@@ -36,7 +50,7 @@ export default function Dashboard(): ReactElement {
   const activities = useMemo(
     () => [
       { icon: <ActivityIcons.Wrench className="h-4 w-4" />, title: "Ticket #1324 pris en charge", description: "Technicien assigné: M. Dupont", time: "il y a 1h" },
-      { icon: <ActivityIcons.Monitor className="h-4 w-4" />, title: "Nouveau matériel ajouté", description: "Moniteur LG 27''", time: "il y a 3h" },
+  { icon: <ActivityIcons.Monitor className="h-4 w-4" />, title: "Nouveau matériel ajouté", description: "Moniteur LG 27&lsquo;&lsquo;", time: "il y a 3h" },
       { icon: <ActivityIcons.LogIn className="h-4 w-4" />, title: "Connexion admin", description: "admin@epitech.re", time: "il y a 5h" },
       { icon: <ActivityIcons.UserPlus className="h-4 w-4" />, title: "Nouvel utilisateur", description: "clara.m@epitech.eu", time: "hier" },
     ],
@@ -48,7 +62,7 @@ export default function Dashboard(): ReactElement {
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
           <h1 className="text-2xl font-bold">Tableau de bord</h1>
-          <p className="text-sm text-slate-500">Vue d'ensemble des tickets, matériels et utilisateurs</p>
+          <p className="text-sm text-slate-500">Vue d&apos;ensemble des tickets, matériels et utilisateurs</p>
         </div>
         <div className="flex gap-2">
           <Select>
@@ -62,7 +76,9 @@ export default function Dashboard(): ReactElement {
             </SelectContent>
           </Select>
           <Button variant="outline" size="sm" className="cursor-pointer" onClick={() => setFiltersOpen(true)}><Filter className="h-4 w-4" />Filtres</Button>
-          <Button variant="outline" size="sm" className="cursor-pointer"><RefreshCw className="h-4 w-4" />Actualiser</Button>
+          <Button variant="outline" size="sm" className="cursor-pointer" onClick={loadCounts} disabled={loadingCounts}>
+            <RefreshCw className="h-4 w-4" />{loadingCounts ? "Chargement…" : "Actualiser"}
+          </Button>
           <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-white cursor-pointer"><PlusCircle className="h-4 w-4" />Nouveau ticket</Button>
         </div>
       </div>
@@ -70,7 +86,7 @@ export default function Dashboard(): ReactElement {
       {/* Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
         <StatCard title="Tickets ouverts" value={42} trend={{ value: 6, direction: "up" }} icon={<Ticket className="h-4 w-4" />} accent="blue" />
-        <StatCard title="Matériel total" value={318} trend={{ value: 2, direction: "up" }} icon={<Monitor className="h-4 w-4" />} accent="green" />
+  <StatCard title="Matériel total" value={materielCount ?? "—"} icon={<Monitor className="h-4 w-4" />} accent="green" />
         <StatCard title="Utilisateurs" value={127} trend={{ value: 1, direction: "down" }} icon={<Users className="h-4 w-4" />} accent="orange" />
         <StatCard title="Tickets en attente" value={5} icon={<Ticket className="h-4 w-4" />} accent="red" />
       </div>
@@ -87,7 +103,7 @@ export default function Dashboard(): ReactElement {
 
         <div className="space-y-4">
           <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-500">Activité récente</h2>
-          <ActivityList items={activities as any} />
+          <ActivityList items={activities as ActivityItem[]} />
         </div>
       </div>
 
