@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactElement } from "react";
+import { ReactElement, useMemo } from "react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
@@ -11,6 +11,26 @@ interface MaterielTableProps {
 }
 
 export default function MaterielTable({ data }: MaterielTableProps): ReactElement {
+  const typeTotals = useMemo(() => {
+    const totals = new Map<string, number>();
+    for (const item of data) {
+      totals.set(item.type, (totals.get(item.type) ?? 0) + 1);
+    }
+    return totals;
+  }, [data]);
+
+  const uniqueByType = useMemo(() => {
+    const seen = new Set<string>();
+    const unique: Materiel[] = [];
+    for (const item of data) {
+      if (!seen.has(item.type)) {
+        seen.add(item.type);
+        unique.push(item);
+      }
+    }
+    return unique;
+  }, [data]);
+
   return (
     <div className="w-full overflow-x-auto rounded-lg border shadow-md bg-slate-100">
       <Table>
@@ -27,7 +47,11 @@ export default function MaterielTable({ data }: MaterielTableProps): ReactElemen
           </TableRow>
         </TableHeader>
         <TableBody>
-          {data.map((item) => (
+          {uniqueByType.map((item) => {
+            const totalForType = typeTotals.get(item.type) ?? 0;
+            const showCounter = totalForType >= 2;
+
+            return (
             <TableRow key={item.numeroSerie}>
               <TableCell>
                 <div className="relative w-16 h-16">
@@ -35,12 +59,19 @@ export default function MaterielTable({ data }: MaterielTableProps): ReactElemen
                     src={item.image}
                     alt={item.name}
                     fill
-                    className="object-contain rounded"
+                    className="object -contain rounded"
                   />
                 </div>
               </TableCell>
               <TableCell className="font-medium">{item.name}</TableCell>
-              <TableCell>{item.type}</TableCell>
+              <TableCell>
+                <div className="flex items-center gap-2">
+                  <span>{item.type}</span>
+                  {showCounter && (
+                    <Badge variant="secondary">x{totalForType}</Badge>
+                  )}
+                </div>
+              </TableCell>
               <TableCell>{item.numeroSerie}</TableCell>
               <TableCell>{item.marque}</TableCell>
               <TableCell>{item.valeur}€</TableCell>
@@ -59,7 +90,7 @@ export default function MaterielTable({ data }: MaterielTableProps): ReactElemen
               </TableCell>
               <TableCell>{item.emplacement}</TableCell>
             </TableRow>
-          ))}
+          );})}
         </TableBody>
       </Table>
     </div>
