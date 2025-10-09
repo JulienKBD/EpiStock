@@ -1,7 +1,7 @@
 const express = require('express');
 const pool = require('../../config/db.js');
 const router = express.Router();
-const { getMateriel, getMaterielById, getMaterielByType, createMateriel } = require('./materiel.query.js');
+const { getMateriel, getMaterielById, getStats, createMateriel } = require('./materiel.query.js');
 
 router.get('/materiel', async (req, res) => {
     let conn;
@@ -22,7 +22,7 @@ router.get('/materiel', async (req, res) => {
     }
 });
 
-router.get('/materiel/:materielId', async (req, res) => {
+router.get('/materiel/getMaterielById/:materielId', async (req, res) => {
     const { materielId } = req.params;
     let conn;
     try {
@@ -31,26 +31,6 @@ router.get('/materiel/:materielId', async (req, res) => {
 
         if (rows.length === 0) {
         return res.status(404).json({ error: 'Matériel non trouvé.' });
-        }
-
-        res.status(200).json(rows[0]);
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: 'Erreur lors de la récupération du matériel.' });
-    } finally {
-        if (conn) conn.release();
-    }
-});
-
-router.get('/materiel/:materielType', async (req, res) => {
-    const { materielType } = req.params;
-    let conn;
-    try {
-        conn = await pool.getConnection();
-        const rows = await conn.query(getMaterielByType, [materielType]);
-
-        if (rows.length === 0) {
-        return res.status(404).json({ error: 'Aucun materiel de ce type trouvé.' });
         }
 
         res.status(200).json(rows[0]);
@@ -79,6 +59,27 @@ router.post('/materiel', async (req, res) => {
             return res.status(409).json({ error: 'Numéro de série déjà existant.' });
         }
         res.status(500).json({ error: 'Erreur lors de l’ajout du matériel.' });
+    } finally {
+        if (conn) conn.release();
+    }
+});
+
+router.get("/materiel/stats", async (req, res) => {
+    let conn;
+    try {
+        conn = await pool.getConnection();
+        const result = await conn.query(getStats);
+
+        const stats = Array.isArray(result) ? result[0] : result;
+
+        res.status(200).json({
+            ordinateurs: stats.ordinateurs || 0,
+            cables: stats.cables || 0,
+            moniteurs: stats.moniteurs || 0,
+        });
+    } catch (err) {
+        console.error("Erreur SQL :", err);
+        res.status(500).json({ error: "Erreur lors du chargement des statistiques." });
     } finally {
         if (conn) conn.release();
     }

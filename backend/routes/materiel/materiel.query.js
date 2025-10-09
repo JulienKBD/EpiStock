@@ -20,9 +20,19 @@ const createMateriel = `
     VALUES (?, ?, ?, ?, ?, ?, ?, ?);
 `
 
+const getStats = `
+    SELECT
+        SUM(CASE WHEN type = 'Ordinateur' THEN 1 ELSE 0 END) AS ordinateurs,
+        SUM(CASE WHEN type = 'Câble' THEN 1 ELSE 0 END) AS cables,
+        SUM(CASE WHEN type = 'Écran' THEN 1 ELSE 0 END) AS moniteurs,
+        COUNT(*) AS total
+    FROM materiel;
+`;
+
 module.exports = {
     getMateriel,
     getMaterielById,
     getMaterielByType,
-    createMateriel
+    createMateriel,
+    getStats
 };

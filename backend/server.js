@@ -32,8 +32,8 @@ app.post('/auth/login', routerAuth);
 
 // Materiel
 app.get('/materiel', routerMateriel);
-app.get('/materiel/:materielId', routerMateriel);
-app.get('/materiel/:materielType', routerMateriel);
+app.get('/materiel/getMaterielById/:materielId', routerMateriel);
+app.get('/materiel/stats', routerMateriel);
 app.post('/materiel', routerMateriel);
 
 // WishList
