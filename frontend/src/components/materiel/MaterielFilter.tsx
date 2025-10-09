@@ -60,7 +60,7 @@ export default function MaterielFilter({
               <SelectValue placeholder="Sélectionner un type" />
             </SelectTrigger>
             <SelectContent className="z-[70] bg-white border border-slate-200 shadow-lg">
-              {["Tous", "Câble", "Ordinateur", "Écran", "Accessoire"].map((type) => (
+              {["Tous", "Câble", "Casque audio", "Clavier", "Imprimantes", "Écran", "Ordinateurs", "Souris", "Autres"].map((type) => (
                 <SelectItem key={type} value={type}>
                   {type}
                 </SelectItem>
@@ -128,7 +128,7 @@ export default function MaterielFilter({
               <SelectValue placeholder="Sélectionner un emplacement" />
             </SelectTrigger>
             <SelectContent className="z-[70] bg-white border border-slate-200 shadow-lg">
-              {["Tous", "Alan", "Denis", "Ada", "Steve", "Hub"].map((loc) => (
+              {["Tous", "ADA", "ALAN", "DENNIS", "GORDON", "GRACE", "ISAAC", "LINUS", "MARGARET", "PEDAGOGIE", "STEVE", "TIM", "Autres"].map((loc) => (
                 <SelectItem key={loc} value={loc}>
                   {loc}
                 </SelectItem>

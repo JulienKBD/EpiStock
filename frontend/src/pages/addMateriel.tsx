@@ -81,7 +81,7 @@ export default function AddMaterielPage(): ReactElement {
               <option value="Casque audio">Casque audio</option>
               <option value="Clavier">Clavier</option>
               <option value="Imprimantes">Imprimantes</option>
-              <option value="Moniteur">Moniteur</option>
+              <option value="Écran">Écran</option>
               <option value="Ordinateur">Ordinateur</option>
               <option value="Souris">Souris</option>
               <option value="Autres">Autres</option>
