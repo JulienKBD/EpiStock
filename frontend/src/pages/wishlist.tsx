@@ -40,14 +40,11 @@ export default function WishListPage(): ReactElement {
 
       {/* Liste des cartes */}
       {!loading && !error && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-10">
           {wishlist.map((item) => (
             <WishlistCard
-              key={item.id}
               name={item.name}
-              type={item.type}
               image={item.image}
-              numeroSerie={item.numeroSerie}
               marque={item.marque}
               valeur={`${item.valeur} €`}
             />

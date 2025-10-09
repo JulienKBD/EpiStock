@@ -15,15 +15,15 @@ export default function MaterielTable({ data }: MaterielTableProps): ReactElemen
     <div className="w-full overflow-x-auto rounded-lg border shadow-md bg-slate-100">
       <Table>
         <TableHeader>
-          <TableRow>
-            <TableHead>Image</TableHead>
-            <TableHead>Nom</TableHead>
-            <TableHead>Type</TableHead>
-            <TableHead>Numéro de série</TableHead>
-            <TableHead>Marque</TableHead>
-            <TableHead>Valeur (€)</TableHead>
-            <TableHead>État</TableHead>
-            <TableHead>Emplacement</TableHead>
+          <TableRow className="font-bold">
+            <TableHead className="font-bold bg-white">Image</TableHead>
+            <TableHead className="font-bold bg-white">Nom</TableHead>
+            <TableHead className="font-bold bg-white">Type</TableHead>
+            <TableHead className="font-bold bg-white">Numéro de série</TableHead>
+            <TableHead className="font-bold bg-white">Marque</TableHead>
+            <TableHead className="font-bold bg-white">Valeur (€)</TableHead>
+            <TableHead className="font-bold bg-white">État</TableHead>
+            <TableHead className="font-bold bg-white">Emplacement</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>

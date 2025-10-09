@@ -111,7 +111,7 @@ export default function MaterielFilter({
               <SelectValue placeholder="Sélectionner l'état" />
             </SelectTrigger>
             <SelectContent className="z-[70] bg-white border border-slate-200 shadow-lg">
-              {["Tous", "Neuf", "Occasion"].map((etat) => (
+              {["Tous", "Disponible", "En prêt", "En panne"].map((etat) => (
                 <SelectItem key={etat} value={etat}>
                   {etat}
                 </SelectItem>
@@ -128,7 +128,7 @@ export default function MaterielFilter({
               <SelectValue placeholder="Sélectionner un emplacement" />
             </SelectTrigger>
             <SelectContent className="z-[70] bg-white border border-slate-200 shadow-lg">
-              {["Tous", "Paris", "Lyon", "Marseille", "Toulouse"].map((loc) => (
+              {["Tous", "Alan", "Denis", "Ada", "Steve", "Hub"].map((loc) => (
                 <SelectItem key={loc} value={loc}>
                   {loc}
                 </SelectItem>

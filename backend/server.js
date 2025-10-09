@@ -41,6 +41,21 @@ app.get('/wishlist', routerWishlist);
 app.get('/wishlist/:wishlistId', routerWishlist);
 app.post('/wishlist', routerWishlist);
 
+
+// const QRCode = require("qrcode");
+
+// app.get("/qrcode", async (req, res) => {
+//     try {
+//         const url = "http://localhost/materiel/123";
+//         const qrCode = await QRCode.toDataURL(url);
+
+//         res.send(`<img src="${qrCode}" alt="QR Code" />`);
+//     } catch (err) {
+//         console.error(err);
+//         res.status(500).send("Erreur génération QR Code");
+//     }
+// });
+
 // 404 Not Found
 app.use(notFound);
 
