@@ -31,6 +31,19 @@ export default function MaterielTable({ data }: MaterielTableProps): ReactElemen
     return unique;
   }, [data]);
 
+  const emplacementsByType = useMemo(() => {
+    const map = new Map<string, string[]>();
+    for (const item of data) {
+      const key = item.type;
+      const emp = (item.emplacement || "").trim();
+      if (!emp) continue;
+      const arr = map.get(key) ?? [];
+      if (!arr.includes(emp)) arr.push(emp);
+      map.set(key, arr);
+    }
+    return map;
+  }, [data]);
+
   return (
     <div className="w-full overflow-x-auto rounded-lg border shadow-md bg-slate-100">
       <Table>
@@ -59,7 +72,7 @@ export default function MaterielTable({ data }: MaterielTableProps): ReactElemen
                     src={item.image}
                     alt={item.name}
                     fill
-                    className="object -contain rounded"
+                    className="object-contain rounded"
                   />
                 </div>
               </TableCell>
@@ -88,7 +101,26 @@ export default function MaterielTable({ data }: MaterielTableProps): ReactElemen
                   {item.etat}
                 </Badge>
               </TableCell>
-              <TableCell>{item.emplacement}</TableCell>
+              <TableCell>
+                {(() => {
+                  const emps = emplacementsByType.get(item.type) ?? (item.emplacement ? [item.emplacement] : []);
+                  const text = emps.join(", ");
+                  return (
+                    <div
+                      className="max-w-[200px] overflow-x-auto whitespace-nowrap pr-2"
+                      onWheel={(e) => {
+                        const el = e.currentTarget as HTMLDivElement;
+                        if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+                          el.scrollLeft += e.deltaY;
+                          e.preventDefault();
+                        }
+                      }}
+                    >
+                      <span>{text}</span>
+                    </div>
+                  );
+                })()}
+              </TableCell>
             </TableRow>
           );})}
         </TableBody>

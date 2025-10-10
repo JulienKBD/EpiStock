@@ -49,7 +49,6 @@ export default function RecentMaterielList({ limit = 6, autoRefreshMs = 0 }: { l
     void load(); // initial
   }, [limit, refreshKey]);
 
-  // Optional auto-refresh polling
   useEffect(() => {
     if (!autoRefreshMs || autoRefreshMs < 1000) return;
     const id = setInterval(() => {
