@@ -56,7 +56,7 @@ CREATE TABLE attributions (
 
 INSERT INTO materiel (name, type, marque, valeur, etat, emplacement, image_url, numero_serie)
 VALUES
-    ('Câble HDMI', 'Accessoire', 'Belkin', 15.00, 'En prêt', 'ALAN', '/assets/HDMI-Cable.png', 'HDMI123456'),
+    ('Câble HDMI', 'Câble', 'Belkin', 15.00, 'En prêt', 'ALAN', '/assets/HDMI-Cable.png', 'HDMI123456'),
     ('Ordinateur Dell', 'Ordinateur', 'Dell', 800.00, 'En panne', 'STEVE', '/assets/Dell_Laptop.png', 'DELL123456'),
     ('Écran LG', 'Écran', 'LG', 200.00, 'Disponible', 'ISAAC', '/assets/LG_Monitor.png', 'LG123456'),
     ('Écran LG', 'Écran', 'LG', 200.00, 'En prêt', 'DENNIS', '/assets/LG_Monitor.png', 'LG789456');
